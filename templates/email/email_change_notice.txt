@@ -1,0 +1,24 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+Your Rave account's email address was changed to {{ user.email }}.
+This message was sent to you to inform you that the change is happening.
+If you did request this change, the address above will receive a confirmation link to complete the process.
+
+
+If you didn't request this email change with customer support please Contact Us at the link below:
+https://support.ravesocial.co/
+
+Thanks,
+The Team at Rave Social.
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2023 RAVE SOCIAL, INC

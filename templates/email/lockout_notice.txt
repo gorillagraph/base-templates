@@ -1,0 +1,33 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+Your account was locked out after too many failed login attempts.
+{% if unlock_at %}
+The lock will remain active until {{ unlock_at }} (UTC) or after you complete a successful password reset.
+{% else %}
+The lock will remain active until you complete a successful password reset.
+{% endif %}
+You can use the link below to change your password, it will only be valid for the next 24 hours.
+
+
+******CLICK THIS LINK TO UNLOCK YOUR ACCOUNT NOW******
+{{ reset_link }}
+
+If you need further help with logging into your account please Contact Support:
+https://support.ravesocial.co/
+
+Thanks,
+The Team at Rave Social.
+
+(If you're having trouble with the link above, copy and paste the URL into your web browser.)
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2018 RAVE SOCIAL, INC

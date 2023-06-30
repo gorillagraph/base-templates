@@ -1,0 +1,24 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+This message is to confirm that your Rave Social account password has been successfully changed.
+{% if user_unlocked %}
+
+Your account was previously locked, but this has been successfully unlocked now, and you should be able to sign in back again.
+{% endif %}
+
+If you didn't request a password change, please contact us immediately, otherwise, please disregard this notification.
+
+Thanks, 
+The Team at Rave Social Games.
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2018 RAVE SOCIAL, INC

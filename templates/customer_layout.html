@@ -1,0 +1,33 @@
+<!--
+Template: Customer specific CSS Styling and Footer
+
+Description: This template extends the 'page_util_layout.html' template and includes custom styling and footer content.
+It allows for customization of the page's background color, logo image, and footer text.
+
+This template overrides the 'head' and 'footer' blocks defined in the 'page_util_layout.html' template.
+
+To customize the styling, modify the CSS rules within the 'head' block. To customize the footer content, modify the
+content within the 'footer' block.
+
+Note: Ensure that the paths and URLs provided for the logo image ('/static/images/company-logo.png') are accurate and
+refer to a valid asset within the project structure.
+-->
+{% extends "page_util_layout.html" %}
+{% block head %}
+  <style type="text/css" rel="stylesheet" media="all">
+    .wrap {
+      background-color: unset;
+    }
+    .footer {
+      background-color: #f2f4f6;
+    }
+    .container.logo {
+      background: url("/static/images/company-logo.png") no-repeat center;
+      background-size: 80px;
+      top: 18px;
+    }
+  </style>
+{% endblock %}
+{% block footer %}
+  <br>&copy; 2023 RAVE SOCIAL
+{% endblock %}

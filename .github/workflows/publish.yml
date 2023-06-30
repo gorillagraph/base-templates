@@ -1,0 +1,56 @@
+name: Publish
+
+on:
+  push:
+    # Triggers the workflow on push events for the branches prefixed with "release-",
+    # where the rest of the branch name typically represents the environment namespace.
+    branches:
+      - release-*
+
+  # Allows to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment to publish to
+        type: environment
+        required: true
+
+jobs:
+  publish:
+    name: Publish
+    runs-on: ubuntu-latest
+    environment: ${{ inputs.environment }}
+
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - name: Check Configuration
+        run: |
+          if [ -z "${{ vars.WORKLOAD_IDENTITY_PROVIDER }}" ] || \
+             [ -z "${{ vars.SERVICE_ACCOUNT_EMAIL }}" ] || \
+             [ -z "${{ vars.GCS_BUCKET }}" ]; then
+            echo "One or more required variables are not set."
+            echo "Please make sure WORKLOAD_IDENTITY_PROVIDER, SERVICE_ACCOUNT_EMAIL, and GCS_BUCKET variables are set."
+            echo "Workflow failed."
+            exit 1
+          fi
+
+      - name: Extract Namespace Name
+        id: setup
+        run: |
+          echo "NAMESPACE=${GITHUB_REF_NAME#release-}" >> $GITHUB_OUTPUT
+
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1.1.1
+        with:
+          workload_identity_provider: ${{ vars.WORKLOAD_IDENTITY_PROVIDER }}
+          service_account: ${{ vars.SERVICE_ACCOUNT_EMAIL }}
+
+      - name: Push to Google Cloud Storage
+        run: |
+          gcloud storage cp -r ./templates/* gs://${{ vars.GCS_BUCKET }}/${{ steps.setup.outputs.NAMESPACE }}

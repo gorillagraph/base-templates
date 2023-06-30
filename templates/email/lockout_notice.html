@@ -1,0 +1,57 @@
+<!--
+Template: Account Lockout Notice
+
+Description: This template is used to send an email notification to users whose accounts have been locked out due to too many failed login attempts.
+
+Template Variables:
+     - user: An object containing information about the user, such as 'name', 'email', etc.
+     - unlock_at: A string representing the date and time (UTC) until which the account lockout will remain active. (Optional)
+     - reset_link: A string representing the URL for removing the user lock status.
+-->
+{% extends "email/base.html" %}
+{% block content %}
+  {% if user.name %}
+  <h1>Hi {{ user.name }},</h1>
+  {% else %}
+  <h1>Hi there,</h1>
+  {% endif %}
+  <p>
+    Your account was locked out after too many failed login attempts.
+    {% if unlock_at %}
+    The lock will remain active until <strong>{{ unlock_at }}</strong> (UTC) or after you complete a successful password reset.
+    {% else %}
+    The lock will remain active until you complete a successful password reset.
+    {% endif %}
+    You can use the button below to change your password, <strong>the link will only be valid for the next 24 hours.</strong>
+  </p>
+  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                    <a href="{{ reset_link }}" class="button button--red" target="_blank">Unlock now</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <p>If you need further help with logging into your account please <a href="https://support.ravesocial.co/">Contact Support</a>.</p>
+  <p>Thanks,
+    <br>The Team at Rave Social.</p>
+  <table class="body-sub">
+    <tr>
+      <td>
+        <p class="sub">If you're having trouble with the button above, copy and paste the URL below into your web browser.</p>
+        <p class="sub">{{ reset_link }}</p>
+      </td>
+    </tr>
+  </table>
+{% endblock %}

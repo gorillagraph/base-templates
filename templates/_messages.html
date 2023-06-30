@@ -1,0 +1,27 @@
+<!--
+Template: Flash Messages
+
+Description: Retrieves flashed messages from the session and displays them as alert messages. It's generally used to
+provide feedback or notifications to the user. This template is included in the 'page_util_layout.html' template, which
+serves as the base content for all web pages.
+
+This code retrieves flashed messages from the session using the `get_flashed_messages()` function with the
+`with_categories=true` parameter. This function is provided by Flask's message flashing mechanism. Please refer to the
+documentation at https://flask.palletsprojects.com/en/1.0.x/patterns/flashing/ for further information.
+
+If there are any flashed messages, this code iterates over them and displays each message within an appropriate alert
+container, whose CSS class is determined based on the message's category. This allows for styling differentiation of
+different types of messages (e.g., success, error, warning).
+
+Note: For customization or adjustment of the alert styling, please refer to the CSS stylesheets and classes used in the
+'page_util_layout.html' template.
+-->
+{%- with messages = get_flashed_messages(with_categories=true) -%}
+  {% if messages %}
+    {% for category, message in messages %}
+    <div class="alert alert-{{ category }}">
+      {{ message }}
+    </div>
+    {% endfor %}
+  {% endif %}
+{%- endwith %}

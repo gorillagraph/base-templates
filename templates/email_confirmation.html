@@ -1,0 +1,44 @@
+<!--
+Template: Email Confirmation
+
+Description: This template is used to display the email confirmation form and related error messages.
+
+Template Variables:
+    - error: A string representing the type of error encountered. It can have one of the following values:
+        - 'invalid'
+        - 'expired'
+        - 'unverified'
+    - error_message: A verbose error message string providing more information about the encountered error.
+-->
+{% extends "customer_layout.html" %}
+{% block tabcontent %}
+    {% if error == 'expired' or error == 'unverified' %}
+    <div class="form-error container">
+        <p>
+            {{  error_message }}
+        </p>
+    </div>
+    <div class="form-forgot container">
+    <form class="form-horizontal" action="/email/confirm" method="POST">
+      <legend>Send email confirmation instructions</legend>
+      <div class="control-group">
+        <label class="control-label" for="email">Email</label>
+        <div class="controls">
+          <input type="text" id="email" name="email" placeholder="Enter your email">
+        </div>
+      </div>
+      <div class="control-group">
+        <div class="controls">
+          <button type="submit" class="btn btn-primary ok">Send</button>
+        </div>
+      </div>
+    </form>
+    </div>
+    {%  elif error == 'invalid' %}
+        <div class="form-error container">
+            <p>
+                {{ error_message }}
+            </p>
+        </div>
+    {% endif %}
+{% endblock %}

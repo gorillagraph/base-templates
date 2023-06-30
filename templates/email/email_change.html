@@ -1,0 +1,55 @@
+<!--
+Template: Email Change Requested
+
+Description: This template is used to send an email to users for confirming a change in their account email address.
+
+Template Variables:
+     - user: An object containing information about the user, such as 'name', 'email', etc.
+     - change_email: A string representing the new email address that the user wants to change to.
+     - change_link: A string representing the URL for confirming the email change.
+-->
+{% extends "email/base.html" %}
+{% block content %}
+  {% if user.name %}
+  <h1>Hi {{ user.name }},</h1>
+  {% else %}
+  <h1>Hi there,</h1>
+  {% endif %}
+  <p>
+      A request has been made to change your Rave account email address to <strong>{{ change_email }}</strong>
+    To keep your information safe and secure, you need to confirm that you are actually requesting
+    this change. To approve the of your Rave account's email address, click on the link below.
+    After the page loads, another email requiring confirmation of the new email will be sent to <strong>{{ change_email }}</strong>.
+    <strong>This confirmation link is only valid for the next 24 hours.</strong>
+  </p>
+  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                    <a href="{{ change_link }}" class="button button--red" target="_blank">Change your account email to {{ change_email }}</a>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <p>If you didn't register an account with us, please ignore this email or <a href="https://support.ravesocial.co/">Contact Support</a>.</p>
+  <p>Thanks,
+    <br>The Team at Rave Social.</p>
+  <table class="body-sub">
+    <tr>
+      <td>
+        <p class="sub">If you're having trouble with the button above, copy and paste the URL below into your web browser.</p>
+        <p class="sub">{{ change_link }}</p>
+      </td>
+    </tr>
+  </table>
+{% endblock %}

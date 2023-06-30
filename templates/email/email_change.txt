@@ -1,0 +1,30 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+A request has been made to change your Rave account email address to {{ change_email }}
+To keep your information safe and secure, you need to confirm that you are actually requesting
+this change. To approve the of your Rave account's email address, click on the link below.
+After the page loads, another email requiring confirmation of the new email will be sent to {{ change_email }}.
+This confirmation link is only valid for the next 24 hours.
+
+******CLICK THIS LINK TO ALLOW YOUR ACCOUNT EMAIL CHANGE******
+{{ change_link }}
+
+If you didn't request the email change to your account, please ignore this email or Contact Support:
+https://support.ravesocial.co/
+
+Thanks,
+The Team at Rave Social.
+
+(If you're having trouble with the link above, copy and paste the URL into your web browser.)
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2023 RAVE SOCIAL, INC

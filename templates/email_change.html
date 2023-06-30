@@ -1,0 +1,23 @@
+<!--
+Template: Password Change Error
+
+Description: This template is used to display error messages related to user password change, such as when the email
+change approval link is invalid, expired, or an unknown error occurs.
+
+Template Variables:
+    - error: A string representing the type of error encountered. It can have one of the following values:
+        - 'invalid'
+        - 'expired'
+        - 'unknown'
+    - error_message: A verbose error message string providing more information about the encountered error.
+-->
+{% extends "customer_layout.html" %}
+{% block tabcontent %}
+  <div class="form-forgot container">
+    <div class="form-error container">
+        <p>
+            {{  error_message }}
+        </p>
+    </div>
+  </div>
+{% endblock %}

@@ -1,0 +1,33 @@
+### IntelliJ project files
+.idea
+*.iml
+out
+gen
+
+### Backup files
+*.bak
+*.gho
+*.ori
+*.orig
+*.tmp
+
+### macOS files
+.DS_Store
+.AppleDouble
+.LSOverride
+
+### VIM temp files
+*.swn
+*.swo
+*.swp
+.ropeproject
+
+### working dir for temp files
+tmp/
+
+.webassets-cache/
+cache/
+.cache
+node_modules
+archive.tar
+.secrets

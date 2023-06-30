@@ -1,0 +1,28 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+You recently requested to reset your password for your Rave Social account.
+To keep your information safe and secure, you can change your password by
+using the link below. This password reset is only valid for the next 24 hours.
+
+******CLICK THIS LINK TO CHANGE YOUR PASSWORD NOW******
+{{ reset_link }}
+
+If you didn't request a password reset, please ignore this email or Contact Support:
+https://support.ravesocial.co/
+
+Thanks,
+The Team at Rave Social.
+
+(If you're having trouble with the link above, copy and paste the URL into your web browser.)
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2018 RAVE SOCIAL, INC

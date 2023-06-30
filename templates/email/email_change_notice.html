@@ -1,0 +1,25 @@
+<!--
+Template: Email Change Notification
+
+Description: This template is used to send an email notification to users confirming a change in their account email address.
+
+Template Variables:
+     - user: An object containing information about the user, such as 'name', 'email', etc.
+-->
+{% extends "email/base.html" %}
+{% block content %}
+  {% if user.name %}
+  <h1>Hi {{ user.name }},</h1>
+  {% else %}
+  <h1>Hi there,</h1>
+  {% endif %}
+  <p>
+      Your Rave account's email address was changed to <strong>{{ user.email }}</strong>.
+        This message was sent to you to inform you that the change is happening.
+      If you did request this change, the address above will receive a confirmation link to complete the process.
+  </p>
+  <p>If you didn't request this email change with customer support please <a href="https://support.ravesocial.co/">Contact Us</a>.</p>
+  <p>Thanks,
+    <br>The Team at Rave Social.</p>
+  </table>
+{% endblock %}

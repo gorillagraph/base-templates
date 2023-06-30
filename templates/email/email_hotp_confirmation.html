@@ -1,0 +1,55 @@
+<!--
+Template: Email Confirmation Instructions with HOTP Code
+
+Description: This template is used to send an email to newly registered users, providing them with a HOTP code to verify
+their email address. This feature is optional and can be configured through the management portal. Please refer
+to 'Email Confirmation Method' in https://dev-docs.ravesocial.co/portal.html#api-configuration for further details.
+
+Template Variables:
+     - user: An object containing information about the user, such as 'name', 'email', etc.
+     - token: A string representing the HOTP code for verifying the email address.
+-->
+{% extends "email/base.html" %}
+{% block content %}
+  {% if user.name %}
+  <h1>Hi {{ user.name }},</h1>
+  {% else %}
+  <h1>Hi there,</h1>
+  {% endif %}
+  <p>
+      You recently registered an account with <strong>Rave</strong>.
+      To keep your information safe and secure, you need to confirm your email address
+      using the code below. Enter this code into the registration page you currently have open.
+      <strong>This confirmation code is only valid for the next 24 hours.</strong>
+  </p>
+  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
+    <tr>
+      <td align="center">
+        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td align="center">
+              <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td>
+                      <strong>{{ token }}</strong>
+                  </td>
+                </tr>
+              </table>
+            </td>
+          </tr>
+        </table>
+      </td>
+    </tr>
+  </table>
+  <p>If you didn't register an account with us, please ignore this email or <a href="https://support.ravesocial.co/">Contact Support</a>.</p>
+  <p>Thanks,
+    <br>The Team at Rave Social.</p>
+  <table class="body-sub">
+    <tr>
+      <td>
+        <p class="sub">If you're having trouble with the button above, copy and paste the URL below into your web browser.</p>
+        <p class="sub">{{ reset_link }}</p>
+      </td>
+    </tr>
+  </table>
+{% endblock %}

@@ -1,0 +1,29 @@
+{%- if user.name %}
+Hi {{ user.name }},
+{%- else %}
+Hi there,
+{%- endif %}
+
+You recently registered an account with Rave.
+To keep your information safe and secure, you need to confirm your email address
+using the link below. Clicking on this link is all that is needed to verify your account.
+This confirmation link is only valid for the next 24 hours.
+
+******CLICK THIS LINK TO CONFIRM YOUR EMAIL NOW******
+{{ reset_link }}
+
+If you didn't request an account with us, please ignore this email or Contact Support:
+https://support.ravesocial.co/
+
+Thanks,
+The Team at Rave Social.
+
+(If you're having trouble with the link above, copy and paste the URL into your web browser.)
+
+This message was sent from an automatic email server.
+Please don't reply to this message as we won't receive your response.
+
+Have questions about your account? We're here to help!
+https://support.ravesocial.co/
+
+© 2023 RAVE SOCIAL, INC
