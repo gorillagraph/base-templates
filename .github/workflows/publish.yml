@@ -16,10 +16,27 @@ on:
         required: true
 
 jobs:
+  set_environment:
+    name: Set Environment
+    runs-on: ubuntu-latest
+    outputs:
+      environment: ${{ steps.setenv.outputs.environment }}
+    steps:
+      - name: Determine Environment
+        id: setenv
+        run: |
+          if [ -n "${{ inputs.environment }}" ]; then
+            environment="${{ inputs.environment }}"
+          else
+            environment="${GITHUB_REF_NAME#release-}"
+          fi
+          echo "environment=$environment" >> $GITHUB_OUTPUT
+
   publish:
     name: Publish
+    needs: set_environment
     runs-on: ubuntu-latest
-    environment: ${{ inputs.environment }}
+    environment: ${{ needs.set_environment.outputs.environment }}
 
     permissions:
       contents: 'read'
@@ -30,17 +47,12 @@ jobs:
         run: |
           if [ -z "${{ vars.WORKLOAD_IDENTITY_PROVIDER }}" ] || \
              [ -z "${{ vars.SERVICE_ACCOUNT_EMAIL }}" ] || \
-             [ -z "${{ vars.GCS_BUCKET }}" ]; then
+             [ -z "${{ vars.BUCKET_URI }}" ]; then
             echo "One or more required variables are not set."
-            echo "Please make sure WORKLOAD_IDENTITY_PROVIDER, SERVICE_ACCOUNT_EMAIL, and GCS_BUCKET variables are set."
+            echo "Please make sure WORKLOAD_IDENTITY_PROVIDER, SERVICE_ACCOUNT_EMAIL, and BUCKET_URI variables are set."
             echo "Workflow failed."
             exit 1
           fi
-
-      - name: Extract Namespace Name
-        id: setup
-        run: |
-          echo "NAMESPACE=${GITHUB_REF_NAME#release-}" >> $GITHUB_OUTPUT
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -53,4 +65,4 @@ jobs:
 
       - name: Push to Google Cloud Storage
         run: |
-          gcloud storage cp -r ./templates/* gs://${{ vars.GCS_BUCKET }}/${{ steps.setup.outputs.NAMESPACE }}
+          gcloud storage cp -r ./templates/* gs://${{ vars.BUCKET_URI }}

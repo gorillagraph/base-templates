@@ -24,16 +24,18 @@ This repository contains HTML templates and static files that can be easily modi
 5. The repository uses a workflow action to automatically publish changes whenever a commit is pushed to a release branch. To enable this automation, certain environment variables need to be set in the repository settings. These variables are required for authentication and configuration of the publishing process, and you may find them under the **Settings > Templates** section of the Rave Developer Portal.
 
    > **Note**
-   > See [Creating configuration variables for a repository](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-a-repository) or [Creating configuration variables for an environment](https://docs.github.com/en/actions/learn-github-actions/variables#creating-configuration-variables-for-an-environment) for instructions on how to configure those.
+   > Please make sure to [use environments for deployments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), this will allow using the same repository to deploy across different environments, see [Creating an environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment) for instructions on how to set up one.
+   >
+   > It's also recommended to configure a [deployment branch](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-branches) for the environment, to restrict the branch that is allowed to deploy to the underlying environment. For example, in a `develop` environment, limit it to the `release-develop` branch, this will ensure that only this branch will be able to trigger a deployment to the `develop` environment.
 
-   - `GCS_BUCKET`: The customer bucket that will hold the assets files.
-   - `SERVICE_ACCOUNT_EMAIL`: e service account email to use for authentication.
-   - `WORKLOAD_IDENTITY_PROVIDER`: The workload identity provider for authentication and authorization.
+   - `BUCKET_URI`: The bucket URI where the assets files will be hosted. This is typically the bucket name followed by the environment namespace.
+   - `SERVICE_ACCOUNT_EMAIL`: The service account email to use for authentication.
+   - `WORKLOAD_IDENTITY_PROVIDER`: The workload identity provider for authorization.
 
 6. Publish Changes:
 
    - Enable GitHub actions on your project. You can do this by navigating to the "Actions" tab and ensuring that workflows are enabled. Note that workflows are initially disabled by default on forks.
-   - For changes to be automatically published, a commit needs to be pushed to a branch with a prefix of `release-` following the branch naming convention: `release-environment-name`. For example: `release-develop`.  Your deployment branch may be found under the **Settings > Templates** section of the Rave Developer Portal.
+   - For changes to be automatically published, a commit needs to be pushed to a branch with a prefix of `release-` following the branch naming convention: `release-environment-name`. For example: `release-develop`. This will ensure that the variables are pulled from correct environment, allowing multi environment deployments.
    - Push your changes to the appropriate release branch.
 
 7. Deployment:
