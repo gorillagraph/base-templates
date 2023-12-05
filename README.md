@@ -7,11 +7,11 @@ This repository contains HTML templates and static files that can be easily modi
 1. Fork this repository to your own GitHub account.
 
 2. Configure the full name of your forked repository in the **Settings > Templates** section of the Developer Portal. This is necessary to set up the correct authorization for deployment automation.
-
-   > **Note**
+   
+> [!NOTE]  
    > The full name of a GitHub repository consists of your GitHub account username followed by the name of the repository, separated by a forward slash ("/"). For example, if your GitHub account username is "your-company" and you named your forked repository "my-custom-templates", the full name would be "your-company/my-custom-templates".
 
-   > **Warning**
+> [!WARNING]  
    > It's important to ensure that the repository is protected from unauthorized changes. This may involve setting up branch protection rules, access permissions, or enabling required reviews for pull requests. By doing so, you can ensure that only authorized individuals can make changes to the repository and maintain control over the deployment process. Reach out to the Rave Support Team if you need help configuring the appropriate repository settings.
 
 3. Clone the forked repository to your local development environment.
@@ -23,7 +23,7 @@ This repository contains HTML templates and static files that can be easily modi
 4. Modify the HTML template or static images files located in the repository according to your needs.
 5. The repository uses a workflow action to automatically publish changes whenever a commit is pushed to a release branch. To enable this automation, certain environment variables need to be set in the repository settings. These variables are required for authentication and configuration of the publishing process, and you may find them under the **Settings > Templates** section of the Rave Developer Portal.
 
-   > **Note**
+> [!NOTE]  
    > Please make sure to [use environments for deployments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), this will allow using the same repository to deploy across different environments, see [Creating an environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment) for instructions on how to set up one.
    >
    > It's also recommended to configure a [deployment branch](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-branches) for the environment, to restrict the branch that is allowed to deploy to the underlying environment. For example, in a `develop` environment, limit it to the `release-develop` branch, this will ensure that only this branch will be able to trigger a deployment to the `develop` environment.
