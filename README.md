@@ -4,7 +4,7 @@ This repository contains HTML templates and static files that can be easily modi
 
 ## Usage
 
-1. Fork this repository to your own GitHub account.
+1. Fork this repository to your own GitHub account (For making it private, import the repository at https://github.com/new/import. Provide this repository URL and specify details like owner, name, and visibility).
 
 2. Configure the full name of your forked repository in the **Settings > Templates** section of the Developer Portal. This is necessary to set up the correct authorization for deployment automation.
    
