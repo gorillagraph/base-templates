@@ -21,4 +21,4 @@ Please don't reply to this message as we won't receive your response.
 Have questions about your account? We're here to help!
 https://support.ravesocial.co/
 
-© 2018 RAVE SOCIAL, INC
+© {{ now.year }} RAVE SOCIAL, INC
