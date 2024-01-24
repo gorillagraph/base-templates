@@ -1,46 +1,51 @@
 # Rave Base Assets
 
-This repository contains HTML templates and static files that can be easily modified and customized according to customer specific needs. You can fork this repository and make changes to the templates to tailor them to your requirements.
+This repository serves as a starting point for customizing HTML templates and static files tailored to customer branding. Follow the steps below to get started.
 
 ## Usage
 
-1. Fork this repository to your own GitHub account (For making it private, import the repository at https://github.com/new/import. Provide this repository URL and specify details like owner, name, and visibility).
+1. Fork this repository to your own GitHub account.
 
-2. Configure the full name of your forked repository in the **Settings > Templates** section of the Developer Portal. This is necessary to set up the correct authorization for deployment automation.
-   
-> [!NOTE]  
-   > The full name of a GitHub repository consists of your GitHub account username followed by the name of the repository, separated by a forward slash ("/"). For example, if your GitHub account username is "your-company" and you named your forked repository "my-custom-templates", the full name would be "your-company/my-custom-templates".
+> [!WARNING]
+> It's important to ensure that the repository is protected from unauthorized changes. This may involve setting up branch protection rules, access permissions, or enabling required reviews for pull requests. By doing so, you can ensure that only authorized individuals can make changes to the repository and maintain control over the deployment process. Reach out to the Rave Support Team if you need help configuring the appropriate repository settings.
 
-> [!WARNING]  
-   > It's important to ensure that the repository is protected from unauthorized changes. This may involve setting up branch protection rules, access permissions, or enabling required reviews for pull requests. By doing so, you can ensure that only authorized individuals can make changes to the repository and maintain control over the deployment process. Reach out to the Rave Support Team if you need help configuring the appropriate repository settings.
-
-3. Clone the forked repository to your local development environment.
+2. Clone the forked repository to your local development environment.
 
     ```shell
     git clone https://github.com/<your-account>/<your-fork-name>.git
     ```
 
-4. Modify the HTML template or static images files located in the repository according to your needs.
-5. The repository uses a workflow action to automatically publish changes whenever a commit is pushed to a release branch. To enable this automation, certain environment variables need to be set in the repository settings. These variables are required for authentication and configuration of the publishing process, and you may find them under the **Settings > Templates** section of the Rave Developer Portal.
+3. Make the necessary changes to the HTML templates or static files.
 
-> [!NOTE]  
-   > Please make sure to [use environments for deployments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), this will allow using the same repository to deploy across different environments, see [Creating an environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment) for instructions on how to set up one.
-   >
-   > It's also recommended to configure a [deployment branch](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-branches) for the environment, to restrict the branch that is allowed to deploy to the underlying environment. For example, in a `develop` environment, limit it to the `release-develop` branch, this will ensure that only this branch will be able to trigger a deployment to the `develop` environment.
+4. Generate an Auth Token in the **Settings > Templates** section of the Rave Developer Portal.
 
-   - `BUCKET_URI`: The bucket URI where the assets files will be hosted. This is typically the bucket name followed by the environment namespace.
-   - `SERVICE_ACCOUNT_EMAIL`: The service account email to use for authentication.
-   - `WORKLOAD_IDENTITY_PROVIDER`: The workload identity provider for authorization.
+5. Configure the generated authorization token as a variable in the repository settings, this is required for the deployment workflow action to automatically publish changes whenever a commit is pushed to a release branch.
+
+    - `AUTH_TOKEN`: The Auth Token obtained from the Rave Developer Portal.
+
+
+> [!TIP]
+> Please make sure to [use environments for deployments](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment), this will allow using the same repository to deploy across different environments, see [Creating an environment](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#creating-an-environment) for instructions on how to set up one.
+>
+> It's also recommended to configure a [deployment branch](https://docs.github.com/en/actions/deployment/targeting-different-environments/using-environments-for-deployment#deployment-branches) for the environment, to restrict the branch that is allowed to deploy to the underlying environment. For example, in a `develop` environment, limit it to the `release-develop` branch, this will ensure that only this branch will be able to trigger a deployment to the `develop` environment.
+
 
 6. Publish Changes:
 
-   - Enable GitHub actions on your project. You can do this by navigating to the "Actions" tab and ensuring that workflows are enabled. Note that workflows are initially disabled by default on forks.
-   - For changes to be automatically published, a commit needs to be pushed to a branch with a prefix of `release-` following the branch naming convention: `release-environment-name`. For example: `release-develop`. This will ensure that the variables are pulled from correct environment, allowing multi environment deployments.
-   - Push your changes to the appropriate release branch.
+    - Enable GitHub actions on your project. You can do this by navigating to the "Actions" tab and ensuring that workflows are enabled. Note that workflows are initially disabled by default on forks.
+    - Enable GitHub issues feature on your project. You can do this by navigating to the project settings and ensuring issues is enabled under features. This will be required to notify if a deployment requires manual review.
+    - For changes to be automatically published, a commit needs to be pushed to a branch with a prefix of `release-` following the branch naming convention: `release-environment-name`. For example: `release-develop`. This will ensure that the variables are pulled from correct environment, allowing multi environment deployments.
+    - Push your changes to the appropriate release branch.
+    - Manual Action Required for Deployment:
+
+> [!IMPORTANT]
+> If the deployment pipeline identifies files that require manual review, it will pause and create an issue for attention. The author of the deployment must then review the issue and decide how to proceed with the deployment.
+>
+> This approval process is subject to the broader 72-hour timeout for a workflow. Keep this duration in mind to ensure timely responses from approvers. Delays in approval may necessitate re-initiation of the deployment process.
 
 7. Deployment:
 
-   - Your application should be configured to fetch the latest templates from the repository based on the specific environment branch. Ensure that your deployment process includes pulling the latest changes from the desired release branch.
+    - Your application should be configured to fetch the latest templates from the repository based on the specific environment branch. Ensure that your deployment process includes pulling the latest changes from the desired release branch.
 
 ## Assets Structure
 
