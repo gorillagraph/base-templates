@@ -22,34 +22,12 @@ Template Variables:
       using the code below. Enter this code into the registration page you currently have open.
       <strong>This confirmation code is only valid for the next 24 hours.</strong>
   </p>
-  <table class="body-action" align="center" width="100%" cellpadding="0" cellspacing="0">
-    <tr>
-      <td align="center">
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td align="center">
-              <table border="0" cellspacing="0" cellpadding="0">
-                <tr>
-                  <td>
-                      <strong>{{ token }}</strong>
-                  </td>
-                </tr>
-              </table>
-            </td>
-          </tr>
-        </table>
-      </td>
-    </tr>
-  </table>
+  <div style="text-align:center;margin:18px">
+    <strong style="text-align:center;font-size:24px;font-weight:bold">{{ token }}</strong>
+  </div>
   <p>If you didn't register an account with us, please ignore this email or <a href="https://support.ravesocial.co/">Contact Support</a>.</p>
+  <br>
   <p>Thanks,
-    <br>The Team at Rave Social.</p>
-  <table class="body-sub">
-    <tr>
-      <td>
-        <p class="sub">If you're having trouble with the button above, copy and paste the URL below into your web browser.</p>
-        <p class="sub">{{ reset_link }}</p>
-      </td>
-    </tr>
-  </table>
+    <br>The Team at Rave Social.
+  </p>
 {% endblock %}

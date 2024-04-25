@@ -4,14 +4,13 @@ Hi {{ user.name }},
 Hi there,
 {%- endif %}
 
-You recently registered an account with Rave.
-To keep your information safe and secure, you need to confirm your email address
-using the code below. Enter this code into the registration page you currently have open.
-This confirmation code is only valid for the next 24 hours.
+You've requested a one-time password (OTP) to access your account at Rave.
+Please use the code below to complete the sign-in process.
+This code is only valid for the next {{ (otp_timeout / 60) | int }} minutes.
 
-{{ token }}
+{{ otp }}
 
-If you didn't request an account with us, please ignore this email or Contact Support:
+If you did not request this code, please ignore this email or Contact Support:
 https://support.ravesocial.co/
 
 Thanks,

@@ -1,0 +1,34 @@
+<!--
+Template: Email Authentication with OTP
+
+Description: This template is dispatched to users who request a One-Time Password (OTP) for secure sign-in or account
+recovery at Rave. It includes the OTP and clear instructions for its use.
+
+
+Template Variables:
+     - user: An object containing information about the user, such as 'name', 'email', etc.
+     - otp: A string representing the OTP code for verifying the user's email or aiding in account recovery.
+     - otp_timeout: An integer representing the OTP's validity duration in seconds. This variable is used to inform the
+          user of the time limit within which the OTP must be used before it expires.
+-->
+{% extends "email/base.html" %}
+{% block content %}
+  {% if user.name %}
+    <h1>Hi {{ user.name }},</h1>
+  {% else %}
+    <h1>Hi there,</h1>
+  {% endif %}
+  <p>
+    You've requested a one-time password (OTP) to access your account at <strong>Rave</strong>.
+    Please use the code below to complete the sign-in process.
+    <strong>This code is only valid for the next {{ (otp_timeout / 60) | int }} minutes.</strong>
+  </p>
+  <div style="text-align:center;margin:18px">
+    <strong style="text-align:center;font-size:24px;font-weight:bold">{{ otp }}</strong>
+  </div>
+  <p>If you did not request this code, please ignore this email or <a href="https://support.ravesocial.co/">Contact Support</a>.</p>
+  <br>
+  <p>Thanks,
+    <br>The Team at Rave Social.
+  </p>
+{% endblock %}
